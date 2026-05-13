@@ -44,7 +44,7 @@ function Gallery() {
         {artworks.map((art) => (
           <div key={art.id} style={{ overflow: "hidden" }}>
             <img
-              src={`https://morada-backend-0e0j.onrender.com${art.image}`}
+              src={`https://morada-backend-0e0j.onrender.com${selectedArt.image}`}
               alt={art.title}
               onClick={() => setSelectedArt(art)}
               style={{
@@ -71,12 +71,15 @@ function Gallery() {
 
                   const token = localStorage.getItem("token");
 
-                  await fetch(`http://127.0.0.1:8000/api/delete/${art.id}/`, {
-                    method: "DELETE",
-                    headers: {
-                      Authorization: `Bearer ${token}`,
+                  await fetch(
+                    `https://morada-backend-0e0j.onrender.com/api/delete/${art.id}/`,
+                    {
+                      method: "DELETE",
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
                     },
-                  });
+                  );
 
                   setArtworks((prev) => prev.filter((a) => a.id !== art.id));
 
