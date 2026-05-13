@@ -9,6 +9,7 @@ function Updates() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [image, setImage] = useState(null);
+  const isAdmin = localStorage.getItem("is_admin") === "true";
 
   useEffect(() => {
     fetch("https://morada-backend-0e0j.onrender.com/api/events/")

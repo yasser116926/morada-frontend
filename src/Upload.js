@@ -10,7 +10,6 @@ function Upload() {
     currency: "USD",
     location: "",
   });
-  const isAdmin = localStorage.getItem("is_admin") === "true";
 
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
