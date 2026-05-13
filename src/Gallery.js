@@ -44,7 +44,7 @@ function Gallery() {
         {artworks.map((art) => (
           <div key={art.id} style={{ overflow: "hidden" }}>
             <img
-              src={`http://127.0.0.1:8000${art.image}`}
+              src={`https://morada-backend-0e0j.onrender.com${art.image}`}
               alt={art.title}
               onClick={() => setSelectedArt(art)}
               style={{
