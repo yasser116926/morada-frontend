@@ -7,14 +7,6 @@ import Login from "./Login";
 import Register from "./Register";
 
 function App() {
-  const [artworks, setArtworks] = useState([]);
-
-  useEffect(() => {
-    fetch("https://morada-backend-0e0j.onrender.com/api/artworks/")
-      .then((res) => res.json())
-      .then((data) => setArtworks(data));
-  }, []);
-
   const isLoggedIn = localStorage.getItem("token");
   const username = localStorage.getItem("username");
 
