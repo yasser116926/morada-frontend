@@ -10,7 +10,7 @@ function App() {
   const [artworks, setArtworks] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/artworks/")
+    fetch("https://morada-backend-0e0j.onrender.com/api/artworks/")
       .then((res) => res.json())
       .then((data) => setArtworks(data));
   }, []);

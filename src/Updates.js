@@ -13,7 +13,7 @@ function Updates() {
   const isAdmin = localStorage.getItem("is_admin") === "true";
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/events/")
+    fetch("https://morada-backend-0e0j.onrender.com/api/events/")
       .then((res) => res.json())
       .then((data) => setEvents(data));
   }, []);
@@ -31,7 +31,7 @@ function Updates() {
 
     const token = localStorage.getItem("token");
 
-    await fetch("http://127.0.0.1:8000/api/events/create/", {
+    await fetch("https://morada-backend-0e0j.onrender.com/api/events/create/", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
