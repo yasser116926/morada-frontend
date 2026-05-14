@@ -41,88 +41,98 @@ function Gallery() {
           gap: "20px",
         }}
       >
-        {artworks.map((art) => (
-          <div key={art.id} style={{ overflow: "hidden" }}>
-            <img
-              src={`https://morada-backend-0e0j.onrender.com${selectedArt.image}`}
-              alt={art.title}
-              onClick={() => setSelectedArt(art)}
-              style={{
-                width: "100%",
-                height: "300px",
-                objectFit: "cover",
-                cursor: "pointer",
-                transition: "transform 0.4s ease",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = "scale(1.05)")
-              }
-              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            />
+        {artworks.map((art) => {
+          if (!art.image) return null;
 
-            <h3>{art.title}</h3>
-
-            {/* ✅ DELETE BUTTON (NOW CORRECTLY INSIDE MAP) */}
-            {isAdmin && (
-              <button
-                onClick={async () => {
-                  const confirmDelete = window.confirm("Delete this artwork?");
-                  if (!confirmDelete) return;
-
-                  const token = localStorage.getItem("token");
-
-                  await fetch(
-                    `https://morada-backend-0e0j.onrender.com/api/delete/${art.id}/`,
-                    {
-                      method: "DELETE",
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    },
-                  );
-
-                  setArtworks((prev) => prev.filter((a) => a.id !== art.id));
-
-                  if (selectedArt && selectedArt.id === art.id) {
-                    setSelectedArt(null);
-                  }
-                }}
+          return (
+            <div key={art.id} style={{ overflow: "hidden" }}>
+              <img
+                src={`https://morada-backend-0e0j.onrender.com${art.image}`}
+                alt={art.title}
+                onClick={() => setSelectedArt(art)}
                 style={{
-                  background: "crimson",
-                  color: "white",
-                  border: "none",
-                  padding: "6px 12px",
+                  width: "100%",
+                  height: "300px",
+                  objectFit: "cover",
                   cursor: "pointer",
-                  marginBottom: "10px",
-                  borderRadius: "4px",
+                  transition: "transform 0.4s ease",
                 }}
-              >
-                Delete
-              </button>
-            )}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
+              />
 
-            {art.price && (
-              <p>
-                {art.price} {art.currency}
-              </p>
-            )}
-            {art.size && (
-              <p>
-                <b>Size:</b> {art.size}
-              </p>
-            )}
-            {art.material && (
-              <p>
-                <b>Material:</b> {art.material}
-              </p>
-            )}
-            {art.location && (
-              <p>
-                <b>Location:</b> {art.location}
-              </p>
-            )}
-          </div>
-        ))}
+              <h3>{art.title}</h3>
+
+              {isAdmin && (
+                <button
+                  onClick={async () => {
+                    const confirmDelete = window.confirm(
+                      "Delete this artwork?",
+                    );
+                    if (!confirmDelete) return;
+
+                    const token = localStorage.getItem("token");
+
+                    await fetch(
+                      `https://morada-backend-0e0j.onrender.com/api/delete/${art.id}/`,
+                      {
+                        method: "DELETE",
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      },
+                    );
+
+                    setArtworks((prev) => prev.filter((a) => a.id !== art.id));
+
+                    if (selectedArt && selectedArt.id === art.id) {
+                      setSelectedArt(null);
+                    }
+                  }}
+                  style={{
+                    background: "crimson",
+                    color: "white",
+                    border: "none",
+                    padding: "6px 12px",
+                    cursor: "pointer",
+                    marginBottom: "10px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Delete
+                </button>
+              )}
+
+              {art.price && (
+                <p>
+                  {art.price} {art.currency}
+                </p>
+              )}
+
+              {art.size && (
+                <p>
+                  <b>Size:</b> {art.size}
+                </p>
+              )}
+
+              {art.material && (
+                <p>
+                  <b>Material:</b> {art.material}
+                </p>
+              )}
+
+              {art.location && (
+                <p>
+                  <b>Location:</b> {art.location}
+                </p>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* MODAL */}
