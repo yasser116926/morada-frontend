@@ -518,7 +518,7 @@ function App() {
                     <input
                       type="hidden"
                       name="_next"
-                      value="http://localhost:3000/"
+                      value="http://morada.art/"
                     />
 
                     <input
