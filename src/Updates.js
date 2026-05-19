@@ -11,6 +11,16 @@ function Updates() {
   const [image, setImage] = useState(null);
   const isAdmin = localStorage.getItem("is_admin") === "true";
 
+  const getImageUrl = (img) => {
+    if (!img) return "";
+
+    if (img.startsWith("http")) {
+      return img;
+    }
+
+    return `https://morada-backend-0e0j.onrender.com${img}`;
+  };
+
   useEffect(() => {
     fetch("https://morada-backend-0e0j.onrender.com/api/events/")
       .then((res) => res.json())
@@ -109,7 +119,7 @@ function Updates() {
         <div key={event.id} style={{ marginBottom: "60px" }}>
           {event.image && (
             <img
-              src={`http://127.0.0.1:8000${event.image}`}
+              src={getImageUrl(event.image)}
               alt={event.title}
               style={{
                 width: "100%",

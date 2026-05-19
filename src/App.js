@@ -522,8 +522,8 @@ function App() {
                     />
 
                     <input
-                      type="text"
-                      name="name"
+                      type="hidden"
+                      name="next"
                       placeholder="Your Name"
                       required
                       style={{
