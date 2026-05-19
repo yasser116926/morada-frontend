@@ -144,17 +144,27 @@ function Updates() {
                 const confirmDelete = window.confirm("Delete this update?");
                 if (!confirmDelete) return;
 
-                await fetch(
-                  `http://127.0.0.1:8000/api/events/delete/${event.id}/`,
-                  {
-                    method: "DELETE",
-                    headers: {
-                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                try {
+                  const res = await fetch(
+                    `https://morada-backend-0e0j.onrender.com/api/events/delete/${event.id}/`,
+                    {
+                      method: "DELETE",
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                      },
                     },
-                  },
-                );
+                  );
 
-                setEvents((prev) => prev.filter((e) => e.id !== event.id));
+                  if (!res.ok) {
+                    alert("Delete failed");
+                    return;
+                  }
+
+                  setEvents((prev) => prev.filter((e) => e.id !== event.id));
+                } catch (err) {
+                  console.error(err);
+                  alert("Something went wrong");
+                }
               }}
               style={{
                 background: "crimson",
