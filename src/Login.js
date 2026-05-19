@@ -23,18 +23,21 @@ function Login() {
       }
 
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/register/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const res = await fetch(
+          "https://morada-backend-0e0j.onrender.com/api/register/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username,
+              email,
+              password,
+              receive_updates: receiveUpdates,
+            }),
           },
-          body: JSON.stringify({
-            username,
-            email,
-            password,
-            receive_updates: receiveUpdates,
-          }),
-        });
+        );
 
         const data = await res.json();
 
