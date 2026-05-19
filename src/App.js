@@ -511,19 +511,37 @@ function App() {
                       margin: "auto",
                     }}
                   >
-                    {/* disable captcha */}
+                    {/* Disable captcha */}
                     <input type="hidden" name="_captcha" value="false" />
 
-                    {/* optional success page */}
+                    {/* Redirect after submit */}
                     <input
                       type="hidden"
                       name="_next"
-                      value="http://morada.art/"
+                      value="https://morada.art/"
                     />
 
+                    {/* Email subject */}
                     <input
                       type="hidden"
-                      name="next"
+                      name="_subject"
+                      value="New MORADA Contact Message"
+                    />
+
+                    {/* Better email layout */}
+                    <input type="hidden" name="_template" value="table" />
+
+                    {/* Auto reply to sender */}
+                    <input
+                      type="hidden"
+                      name="_autoresponse"
+                      value="Thank you for contacting MORADA. Your message has been received."
+                    />
+
+                    {/* NAME */}
+                    <input
+                      type="text"
+                      name="name"
                       placeholder="Your Name"
                       required
                       style={{
@@ -535,6 +553,7 @@ function App() {
                       }}
                     />
 
+                    {/* EMAIL */}
                     <input
                       type="email"
                       name="email"
@@ -549,6 +568,7 @@ function App() {
                       }}
                     />
 
+                    {/* MESSAGE */}
                     <textarea
                       name="message"
                       placeholder="Write your message here..."
@@ -564,6 +584,7 @@ function App() {
                       }}
                     />
 
+                    {/* BUTTON */}
                     <button
                       type="submit"
                       style={{

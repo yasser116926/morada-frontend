@@ -27,17 +27,20 @@ function Register() {
     }
 
     try {
-      fetch("https://morada-backend-0e0j.onrender.com/api/register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://morada-backend-0e0j.onrender.com/api/register/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: form.username,
+            email: form.email,
+            password: form.password,
+          }),
         },
-        body: JSON.stringify({
-          username: form.username,
-          email: form.email,
-          password: form.password,
-        }),
-      });
+      );
 
       const data = await res.json();
 
