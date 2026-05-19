@@ -5,6 +5,16 @@ function Gallery() {
   const [selectedArt, setSelectedArt] = useState(null);
   const isAdmin = localStorage.getItem("is_admin") === "true";
 
+  const getImageUrl = (img) => {
+    if (!img) return "";
+
+    if (img.startsWith("http")) {
+      return img;
+    }
+
+    return `https://morada-backend-0e0j.onrender.com${img}`;
+  };
+
   useEffect(() => {
     fetch("https://morada-backend-0e0j.onrender.com/api/artworks/")
       .then((res) => res.json())
@@ -47,7 +57,7 @@ function Gallery() {
           return (
             <div key={art.id} style={{ overflow: "hidden" }}>
               <img
-                src={`https://morada-backend-0e0j.onrender.com${art.image}`}
+                src={getImageUrl(art.image)}
                 alt={art.title}
                 onClick={() => setSelectedArt(art)}
                 style={{
@@ -165,7 +175,7 @@ function Gallery() {
             }}
           >
             <img
-              src={`http://127.0.0.1:8000${selectedArt.image}`}
+              src={getImageUrl(selectedArt.image)}
               alt={selectedArt.title}
               style={{
                 width: "100%",
