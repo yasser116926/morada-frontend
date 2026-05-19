@@ -8,10 +8,17 @@ function Gallery() {
   const getImageUrl = (img) => {
     if (!img) return "";
 
+    // Full URL already
     if (img.startsWith("http")) {
       return img;
     }
 
+    // Cloudinary partial path
+    if (img.startsWith("image/upload")) {
+      return `https://res.cloudinary.com/duwzhscip/${img}`;
+    }
+
+    // Django media fallback
     return `https://morada-backend-0e0j.onrender.com${img}`;
   };
 
